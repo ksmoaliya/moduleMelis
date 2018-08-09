@@ -1,0 +1,7 @@
+#publications-list-plugin-default-template .thumbnail{
+   	max-height: 450px;
+    overflow: hidden;
+}
+#publications-list-plugin-default-template h3{
+    color: initial;
+}

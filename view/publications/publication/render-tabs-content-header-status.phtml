@@ -1,0 +1,7 @@
+
+<div id="<?= $this->publicationId ?>_publication_status" class="make-switch main_variant_switch" data-on-label="<?php echo $this->translate('tr_publications_status_active')?>" data-off-label="<?php echo $this->translate('tr_publications_status_inactive')?>" data-text-label="<?php echo $this->translate('tr_publications_status_status')?>">
+    <input type="checkbox" name="publication_status" id="publication_status"  <?= $this->status ?>>
+</div>
+<script type="text/javascript">
+	$("#<?= $this->publicationId ?>_publication_status").bootstrapSwitch();
+</script>

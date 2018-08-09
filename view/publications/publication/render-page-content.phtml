@@ -1,0 +1,43 @@
+<?php
+    $id = '';
+    if (!empty($this->zoneconfig['conf']['id'])){
+        $id .= $this->publicationId.'_'.$this->zoneconfig['conf']['id'];
+    }
+?>
+<div id="<?= $id ?>" data-melisKey="<?= $this->melisKey; ?>" class="widget widget-tabs widget-tabs-double-2 widget-tabs-responsive">
+	<div class="widget-head nav">
+		<ul class="tabs-label nav-tabs">
+			<?php
+            	if(!empty($this->zoneconfig['interface'])) {
+            	    foreach($this->zoneconfig['interface'] as $keyConfig => $menuConfig) {
+
+            	        $tabId = $this->publicationId.'_'.$menuConfig['conf']['id'];
+            	        $tabIcon = $menuConfig['conf']['icon'];
+            	        $tabName = $menuConfig['conf']['name'];
+
+        	            $li= '<li>
+                	            <a class="'.$tabIcon.'" data-toggle="tab" href="#'.$tabId.'" aria-expanded="true">
+                            		<i></i>
+                            		<span>'.$this->translate($tabName).'</span>
+                            	</a>
+                            </li>';
+
+        	            if(empty($this->publicationId) && $menuConfig['conf']['melisKey'] == 'publication_content_tabs_medias'){
+        	                $li = '';
+        	            }
+        	            echo $li;
+            	    }
+            	}
+            ?>
+		</ul>
+	</div>
+</div>
+<div class="tab-content innerAll spacing-x2">
+	<?php
+    	if(!empty($this->zoneconfig['interface'])) {
+    	    foreach($this->zoneconfig['interface'] as $keyConfig => $menuConfig) {
+	           echo $this->$keyConfig.' ';
+    	    }
+    	}
+    ?>
+</div>

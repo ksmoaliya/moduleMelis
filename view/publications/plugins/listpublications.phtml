@@ -1,0 +1,66 @@
+<div id="<?php echo $this->pluginId?>">
+    <div id="publications-list-plugin">
+    	<form method="get">
+        	<div class="row">
+              	<div class="col-sm-6 col-md-8">
+              		<div class="form-inline">
+              			<div class="form-group">
+                            <input type="text" class="form-control" name="date_min" id="date-min" placeholder="Date from" value="<?php echo $this->dateMin?>" readonly>
+                      	</div>
+                      	<div class="form-group">
+                            <input type="text" class="form-control" name="date_max" id="date-max"  placeholder="Date to" value="<?php echo $this->dateMax?>" readonly>
+                      	</div>
+                      	<button type="submit" class="btn btn-default">Filter</button>
+            		</div>
+              	</div>
+              	<div class="col-sm-6 col-md-4 text-right">
+                	<div class="form-inline">
+                      	<div class="form-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search Publication..." value="<?php echo $this->searchKey?>">
+                      	</div>
+                      	<button type="submit" class="btn btn-default">Search</button>
+            		</div>
+              	</div>
+        	</div>
+    	</form>
+    	<br>
+        <div class="row">
+        	<?php if (!empty($this->listPublications->count())){?>
+            	<?php foreach ($this->listPublications As $val){?>
+                  	<div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                        	<div class="caption">
+                          		<a href="<?php echo $val['publicationLink'] ?>">
+                                	<h3><?php echo $val['publication_title'] ?></h3>
+                                </a>
+                                <p><?php echo $val['publication_paragraph1'] ?></p>
+                          	</div>
+                        </div>
+                  	</div>
+              	<?php }?>
+          	<?php }else{?>
+          		<div class="col-sm-12 col-md-12">
+          			<div class="alert alert-warning" role="alert">
+            			No result
+            		</div>
+          		</div>
+          	<?php }?>
+        </div>
+    </div>
+    
+    <!-- Pagination -->
+    <?php 
+        // Generating Pagination Control using partial view
+        echo $this->paginationControl(
+                $this->listPublications, 
+                'Sliding', 
+                'Publications/list-paginator',
+                array(
+                    'searchKey' => $this->searchKey,
+                    'dateMin' => $this->dateMin,
+                    'dateMax' => $this->dateMax,
+                    'nbPageBeforeAfter' => $this->nbPageBeforeAfter
+                )
+        ); 
+    ?>
+</div>

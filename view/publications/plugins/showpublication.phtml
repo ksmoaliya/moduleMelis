@@ -1,0 +1,42 @@
+<style>
+.thumb-contenido{
+    margin-bottom:1%;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+</style>
+<div id="<?php echo $this->pluginId?>">
+	<?php if (!empty($this->publication)){?>
+        <div class="container">
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row hidden-md hidden-lg">
+                        	<h1 class="text-center" ><?php echo $this->publication->publication_title?></h1>
+                    	</div>
+                    	<div class="">
+                            <h1  class="hidden-xs hidden-sm"><?php echo $this->publication->publication_title?></h1>
+                            <small><?php echo date('F d, Y', strtotime($this->publication->publication_date))?></small><br>
+                            <?php
+                                $ctr = 1;
+                                do
+                                {
+                                    $tmp = 'publication_paragraph'.$ctr++;
+
+                                    if (!empty($this->publication->$tmp))
+                                    {
+                                        echo '<p class="text-justify">'.$this->publication->$tmp.'</p>';
+                                    }
+                                }while($ctr < 5);
+                            ?>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php }else{?>
+    	<div class="alert alert-warning" role="alert">
+			No result
+		</div>
+    <?php }?>
+</div>

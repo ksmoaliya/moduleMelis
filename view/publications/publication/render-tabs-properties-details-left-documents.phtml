@@ -1,0 +1,38 @@
+<?php 
+    $id = '';
+    if (!empty($this->zoneconfig['conf']['id'])){
+        $id .= $this->publicationId.'_'.$this->zoneconfig['conf']['id'];
+    }
+    if(!empty($this->publicationId)):
+?>
+<div id="<?= $id ?>" data-melisKey="<?= $this->melisKey; ?>">
+	<div class="npdc-heading">
+		<h4>
+			<i class="fa fa-paperclip"></i>
+			<?= $this->translate('tr_publications_subheader_documents')?>
+		</h4>
+		<?php if(count($this->documents) != $this->limit && !empty($this->publicationId)):?>						
+		<a class="btn btn-success publicationAttachFile" data-publicationid="<?= $this->publicationId?>" data-filetype="file"><i class="fa fa-plus"></i> <?= $this->translate('tr_publications_attach_file')?></a>
+		<?php endif;?>
+	</div>						
+	<div class="pdc-content border-bottom">
+		<?php 
+		if(!empty($this->documents)){
+		    echo '<div class="news-file-cont">';
+		    foreach($this->documents as $doc):?>
+		    <p><?= $doc['documents'] ?>
+		    	<i class="fa fa-times-circle removeAttachFile" data-publicationid="<?= $doc['publication_id']?>" data-column="<?= $doc['column']?>" data-type="file"></i> &nbsp;
+		    	<i class="fa fa-pencil publicationEditImage" data-publicationid="<?= $doc['publication_id']?>" data-column="<?= $doc['column']?>" data-filetype="file" style="padding-right: 10px;"></i>
+				
+			</p>		    
+		    <?php
+		    endforeach;
+		    echo '</div>';
+		}else{
+		    echo '<p>'. $this->translate('tr_publications_attach_file_none') .'</p>';
+		    
+		}
+		?>					
+	</div>
+</div>
+<?php endif;?>

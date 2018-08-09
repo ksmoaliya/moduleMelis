@@ -1,0 +1,48 @@
+<?php 
+    $id = '';
+    if (!empty($this->zoneconfig['conf']['id'])){
+        $id .= $this->publicationId.'_'.$this->zoneconfig['conf']['id'];
+    }
+    if(!empty($this->publicationId)){
+?>
+<div id="<?= $id ?>" data-melisKey="<?= $this->melisKey; ?>">
+	<div class="npdc-heading">
+		<h4>
+			<i class="fa fa-image"></i>
+			<?= $this->translate('tr_publications_subheader_images')?>
+		</h4>
+		<?php if(count($this->images) != $this->limit && !empty($this->publicationId)):?>						
+		<a class="btn btn-success publicationAttachImage" data-publicationid="<?= $this->publicationId?>" data-filetype="image"><i class="fa fa-plus"></i> <?= $this->translate('tr_publications_attach_image')?></a>
+		<?php endif;?>
+	</div>
+	<div class="pdc-content border-bottom">						
+	<?php 
+	   if(count($this->images)){
+	       foreach($this->images as $image){
+	       ?>
+	       <div class="me-p-image">
+        	<img src="<?= $image['image']?>">
+        		<div class="hover-details">
+        			<div class="me-p-btn-cont">
+        				<a class="viewImageDocument" href="<?= $image['image']?>" target="_blank">
+        					<i class="fa fa-eye"></i>
+        				</a>
+        				<a class="publicationEditImage" data-publicationid ="<?= $image['publication_id']?>" data-column="<?= $image['column']?>"  data-filetype="image">
+        					<i class="fa fa-pencil"></i>
+        				</a>				
+        				<a class="removeAttachFile" data-publicationid ="<?= $image['publication_id']?>" data-column="<?= $image['column']?>"  data-type="image">
+        					<i class="fa fa-times"></i>
+        				</a>
+        			</div>
+        		</div>
+        	</div>
+        	<br>
+	       <?php 
+	       }
+	   }else{
+	       echo '<p>'.$this->translate('tr_publications_image_none').'</p>';
+	   }
+	?>
+	</div>
+</div>
+<?php }?>
